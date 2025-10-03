@@ -22,9 +22,6 @@ Route::get('/flowbite-example', function () {
     return Inertia::render('FlowbiteExample');
 })->name('flowbite.example');
 
-Route::get('/dashboard2', function () {
-    return Inertia::render('Dashboard2');
-})->middleware(['auth', 'verified'])->name('dashboard2');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

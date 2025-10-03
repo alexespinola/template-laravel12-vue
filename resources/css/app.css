@@ -1,6 +1,10 @@
+/* import Flowbite Vue styles */
+@import "flowbite-vue/index.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* Clases globales para modo oscuro */
 @layer components {
@@ -8,27 +12,27 @@
     .page-title {
         @apply text-3xl font-bold mb-6 text-gray-900 dark:text-white;
     }
-    
+
     /* Subtítulos */
     .section-title {
         @apply text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200;
     }
-    
+
     /* Contenedores principales */
     .content-container {
         @apply bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg;
     }
-    
+
     /* Texto de contenido */
     .content-text {
         @apply text-gray-900 dark:text-gray-100;
     }
-    
+
     /* Texto secundario */
     .secondary-text {
         @apply text-gray-600 dark:text-gray-300;
     }
-    
+
     /* Cards y paneles */
     .card {
         @apply bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700;

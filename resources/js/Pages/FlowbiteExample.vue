@@ -21,8 +21,8 @@
                             <div class="mb-6">
                                 <h2 class="section-title">Button Components</h2>
                                 <div class="space-y-4">
-                                    <!-- Colores básicos disponibles -->
-                                    <div class="space-x-2">
+                                    <!-- Colores según documentación oficial -->
+                                    <div class="space-x-2 space-y-2">
                                         <fwb-button color="default">Default</fwb-button>
                                         <fwb-button color="alternative">Alternative</fwb-button>
                                         <fwb-button color="dark">Dark</fwb-button>
@@ -32,6 +32,51 @@
                                         <fwb-button color="yellow">Yellow</fwb-button>
                                         <fwb-button color="purple">Purple</fwb-button>
                                         <fwb-button color="pink">Pink</fwb-button>
+                                        <fwb-button color="blue">Blue</fwb-button>
+                                    </div>
+
+                                    <!-- Outline buttons -->
+                                    <div class="space-x-2">
+                                        <fwb-button color="default" outline>Default Outline</fwb-button>
+                                        <fwb-button color="dark" outline>Dark Outline</fwb-button>
+                                        <fwb-button color="green" outline>Green Outline</fwb-button>
+                                        <fwb-button color="red" outline>Red Outline</fwb-button>
+                                        <fwb-button color="yellow" outline>Yellow Outline</fwb-button>
+                                        <fwb-button color="purple" outline>Purple Outline</fwb-button>
+                                    </div>
+
+                                    <!-- Tamaños -->
+                                    <div class="space-x-2 items-center flex">
+                                        <fwb-button size="xs">Extra Small</fwb-button>
+                                        <fwb-button size="sm">Small</fwb-button>
+                                        <fwb-button size="md">Medium</fwb-button>
+                                        <fwb-button size="lg">Large</fwb-button>
+                                        <fwb-button size="xl">Extra Large</fwb-button>
+                                    </div>
+
+                                    <!-- Pill buttons -->
+                                    <div class="space-x-2">
+                                        <fwb-button color="default" pill>Default Pill</fwb-button>
+                                        <fwb-button color="green" pill>Green Pill</fwb-button>
+                                        <fwb-button color="red" pill>Red Pill</fwb-button>
+                                        <fwb-button color="purple" pill>Purple Pill</fwb-button>
+                                    </div>
+
+                                    <!-- Gradient buttons (monochrome) -->
+                                    <div class="space-x-2">
+                                        <fwb-button gradient="blue">Blue Gradient</fwb-button>
+                                        <fwb-button gradient="green">Green Gradient</fwb-button>
+                                        <fwb-button gradient="red">Red Gradient</fwb-button>
+                                        <fwb-button gradient="purple">Purple Gradient</fwb-button>
+                                        <fwb-button gradient="pink">Pink Gradient</fwb-button>
+                                    </div>
+
+                                    <!-- Gradient buttons (duotone) -->
+                                    <div class="space-x-2">
+                                        <fwb-button gradient="purple-blue">Purple to Blue</fwb-button>
+                                        <fwb-button gradient="green-blue">Green to Blue</fwb-button>
+                                        <fwb-button gradient="red-yellow">Red to Yellow</fwb-button>
+                                        <fwb-button gradient="pink-orange">Pink to Orange</fwb-button>
                                     </div>
                                 </div>
                             </div>
