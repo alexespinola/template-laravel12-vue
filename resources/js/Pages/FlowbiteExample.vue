@@ -4,6 +4,7 @@ import DatePicker from '@/Components/DatePicker.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import {
+    FwbToast ,
     FwbAlert,
     FwbButton,
     FwbCard,
@@ -70,6 +71,8 @@ const onDateChange = (date) => {
                                     @change="onDateChange"
                                 />
                             </div>
+
+                            <hr>
 
                             <!-- FontAwesome Icons -->
                             <div class="mb-6">
@@ -156,18 +159,31 @@ const onDateChange = (date) => {
                                 </div>
                             </div>
 
+                            <hr>
+
                             <!-- Dropdown Component -->
                             <div class="mb-6">
                                 <h2 class="section-title">Dropdown Component</h2>
-                                <fwb-dropdown placement="bottom">
-                                    <template #trigger>
-                                        <fwb-button color="light">
-                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                                            <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                            </svg>
-                                        </fwb-button>
-                                    </template>
-                                    <!-- <nav class="py-2 text-sm text-gray-700 dark:text-gray-200"> -->
+                                <div class="flex space-x-4 mb-4">
+                                    <fwb-dropdown placement="bottom">
+                                        <template #trigger>
+                                            <fwb-button color="light">
+                                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                                </svg>
+                                            </fwb-button>
+                                        </template>
+                                            <fwb-list-group >
+                                                <fwb-list-group-item>
+                                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                                </fwb-list-group-item>
+                                                <fwb-list-group-item>
+                                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                                </fwb-list-group-item>
+                                            </fwb-list-group>
+                                    </fwb-dropdown>
+
+                                    <fwb-dropdown placement="bottom">
                                         <fwb-list-group >
                                             <fwb-list-group-item>
                                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
@@ -176,9 +192,11 @@ const onDateChange = (date) => {
                                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                                             </fwb-list-group-item>
                                         </fwb-list-group>
-                                    <!-- </nav> -->
-                                </fwb-dropdown>
+                                    </fwb-dropdown>
+                                </div>
                             </div>
+
+                            <hr>
 
                             <!-- Alert Component -->
                             <div class="mb-6">
@@ -186,6 +204,16 @@ const onDateChange = (date) => {
                                 <fwb-alert type="success" closable icon class="dark:bg-gray-700">
                                     ¡Flowbite se ha instalado correctamente!
                                 </fwb-alert>
+                            </div>
+
+                            <hr>
+
+                            <!-- Toast Component -->
+                            <div class="mb-6">
+                                <h2 class="section-title">Toast Component</h2>
+                                <fwb-toast type="success" icon class="dark:bg-gray-700">
+                                    ¡Flowbite se ha instalado correctamente!
+                                </fwb-toast>
                             </div>
 
                             <!-- Button Components -->
@@ -252,6 +280,8 @@ const onDateChange = (date) => {
                                 </div>
                             </div>
 
+                            <hr>
+
                             <!-- Card Component -->
                             <div class="mb-6">
                                 <h2 class="section-title">Card Component</h2>
@@ -276,6 +306,8 @@ const onDateChange = (date) => {
                                     </template>
                                 </fwb-card>
                             </div>
+
+                            <hr>
 
                             <!-- Input Component -->
                             <div class="mb-6">
@@ -317,6 +349,8 @@ const onDateChange = (date) => {
                                     </fwb-input>
                                 </div>
                             </div>
+
+                            <hr>
 
                             <!-- Modal Example -->
                             <div class="mb-6">
