@@ -1,0 +1,358 @@
+/* Tabulator Dark Mode Styles - Sobrescribir todos los estilos con @apply */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Contenedor principal de la tabla */
+.tabulator {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg !important;
+}
+
+/* Header de la tabla */
+.tabulator .tabulator-header {
+    background-color: #f9fafb !important;
+    border-bottom: 1px solid #e5e7eb !important;
+}
+
+.dark .tabulator .tabulator-header {
+    background-color: #374151 !important;
+    border-bottom: 1px solid #4b5563 !important;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+    background-color: transparent !important;
+    border-right: 1px solid #e5e7eb !important;
+    color: #111827 !important;
+}
+
+.dark .tabulator .tabulator-header .tabulator-col {
+    border-right: 1px solid #4b5563 !important;
+    color: #f9fafb !important;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+    color: #111827 !important;
+    font-weight: 500 !important;
+}
+
+.dark .tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+    color: #f9fafb !important;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+    color: #111827 !important;
+}
+
+.dark .tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+    color: #f9fafb !important;
+}
+
+/* Filas de la tabla - Estilos más específicos */
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    color: #111827 !important;
+}
+
+.dark .tabulator .tabulator-tableHolder .tabulator-table .tabulator-row {
+    background-color: #1f2937 !important;
+    border-bottom: 1px solid #374151 !important;
+    color: #f9fafb !important;
+}
+
+/* Forzar estilos en todas las celdas */
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row .tabulator-cell {
+    background-color: inherit !important;
+    color: #111827 !important;
+}
+
+.dark .tabulator .tabulator-tableHolder .tabulator-table .tabulator-row .tabulator-cell {
+    background-color: inherit !important;
+    color: #f9fafb !important;
+}
+
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row.tabulator-row-even {
+    background-color: #f9fafb !important;
+}
+
+.dark .tabulator .tabulator-tableHolder .tabulator-table .tabulator-row.tabulator-row-even {
+    background-color: #111827 !important;
+}
+
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row:hover {
+    background-color: #f3f4f6 !important;
+}
+
+.dark .tabulator .tabulator-tableHolder .tabulator-table .tabulator-row:hover {
+    background-color: #374151 !important;
+}
+
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row.tabulator-selected {
+    background-color: #dbeafe !important;
+}
+
+.dark .tabulator .tabulator-tableHolder .tabulator-table .tabulator-row.tabulator-selected {
+    background-color: #1e3a8a !important;
+}
+
+/* Celdas */
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row .tabulator-cell {
+    color: #111827 !important;
+    border-right: 1px solid #f3f4f6 !important;
+}
+
+.dark .tabulator .tabulator-tableHolder .tabulator-table .tabulator-row .tabulator-cell {
+    color: #f9fafb !important;
+    border-right: 1px solid #374151 !important;
+}
+
+.tabulator .tabulator-tableHolder .tabulator-table .tabulator-row .tabulator-cell:last-child {
+    @apply border-r-0 !important;
+}
+
+/* Paginación */
+.tabulator .tabulator-footer {
+    @apply bg-gray-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600 !important;
+}
+
+.tabulator .tabulator-footer .tabulator-page {
+    @apply bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-500 !important;
+}
+
+.tabulator .tabulator-footer .tabulator-page.active {
+    @apply bg-blue-500 dark:bg-blue-600 text-white border-blue-500 dark:border-blue-600 !important;
+}
+
+.tabulator .tabulator-footer .tabulator-page:hover {
+    @apply bg-gray-100 dark:bg-gray-500 !important;
+}
+
+.tabulator .tabulator-footer .tabulator-paginator {
+    @apply text-gray-900 dark:text-gray-100 !important;
+}
+
+/* Selectores de tamaño de página */
+.tabulator .tabulator-footer .tabulator-page-size {
+    @apply bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-500 !important;
+    min-width: 60px !important;
+    padding: 2px 2px 18px 6px !important;
+    font-size: 0.8rem !important;
+}
+
+/* Selector de tamaño de página - tamaño optimizado */
+.tabulator .tabulator-footer .tabulator-paginator .tabulator-page-size {
+    width: auto !important;
+    min-width: 60px !important;
+    padding: 2px 18px 2px 6px !important;
+    height: 28px !important;
+}
+
+/* Dropdown arrow específico para page size */
+.tabulator .tabulator-footer .tabulator-page-size:after {
+    right: 8px !important;
+}
+
+/* Elementos de ordenamiento */
+.tabulator .tabulator-header .tabulator-col[data-sortable="true"]:hover {
+    @apply bg-gray-100 dark:bg-gray-600 !important;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-arrow {
+    @apply text-gray-600 dark:text-gray-300 !important;
+}
+
+/* Loading overlay */
+.tabulator .tabulator-loader {
+    @apply bg-white dark:bg-gray-800 !important;
+}
+
+.tabulator .tabulator-loader .tabulator-loader-msg {
+    @apply text-gray-900 dark:text-gray-100 !important;
+}
+
+/* Tooltips */
+.tabulator-tooltip {
+    @apply bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 !important;
+}
+
+/* Resize handles */
+.tabulator .tabulator-header .tabulator-col .tabulator-col-resize-handle {
+    @apply bg-gray-300 dark:bg-gray-600 !important;
+}
+
+/* Checkbox selectors */
+.tabulator .tabulator-row .tabulator-cell .tabulator-row-handle {
+    @apply text-gray-600 dark:text-gray-300 !important;
+}
+
+/* Estilos para filas seleccionadas en dark mode */
+.dark .tabulator .tabulator-row.tabulator-selected {
+    background-color: #1e40af !important; /* blue-800 */
+    border-color: #3b82f6 !important; /* blue-500 */
+}
+
+.dark .tabulator .tabulator-row.tabulator-selected .tabulator-cell {
+    background-color: #1e40af !important; /* blue-800 */
+    color: #ffffff !important;
+}
+
+/* Checkbox específicos para selección de filas */
+.dark .tabulator .tabulator-selectrow {
+    background-color: #374151 !important; /* gray-700 */
+}
+
+/* Estilos específicos para checkboxes marcados en dark mode */
+.dark .tabulator .tabulator-row .tabulator-cell .tabulator-selectrow-checkbox {
+    background-color: #3b82f6 !important; /* blue-500 cuando está marcado */
+    border-color: #3b82f6 !important;
+}
+
+.dark .tabulator .tabulator-row .tabulator-cell .tabulator-selectrow-checkbox input[type="checkbox"] {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+}
+
+.dark .tabulator .tabulator-row .tabulator-cell .tabulator-selectrow-checkbox input[type="checkbox"]:checked {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Estilo para el checkmark dentro del checkbox */
+.dark .tabulator .tabulator-row .tabulator-cell .tabulator-selectrow-checkbox:after {
+    color: #ffffff !important;
+}
+
+/* Estilos más específicos para elementos de selección */
+.dark .tabulator .tabulator-row .tabulator-cell[data-field="_tabulator_row_selector"] {
+    background-color: inherit !important;
+}
+
+/* Checkbox input específico */
+.dark .tabulator input[type="checkbox"] {
+    background-color: #374151 !important;
+    border: 2px solid #6b7280 !important;
+}
+
+.dark .tabulator input[type="checkbox"]:checked {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+}
+
+/* Header checkbox */
+.dark .tabulator .tabulator-header .tabulator-col .tabulator-col-content input[type="checkbox"] {
+    background-color: #374151 !important;
+    border: 2px solid #6b7280 !important;
+}
+
+.dark .tabulator .tabulator-header .tabulator-col .tabulator-col-content input[type="checkbox"]:checked {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+}
+
+.dark .tabulator .tabulator-selectrow.tabulator-selectrow-selected {
+    background-color: #3b82f6 !important; /* blue-500 */
+    border-color: #1d4ed8 !important; /* blue-700 */
+}
+
+.dark .tabulator .tabulator-selectrow.tabulator-selectrow-selected:after {
+    color: #ffffff !important;
+}
+
+/* Estilos para el header checkbox */
+.dark .tabulator .tabulator-header .tabulator-col .tabulator-selectrow {
+    background-color: #374151 !important; /* gray-700 */
+    border: 2px solid #6b7280 !important; /* gray-500 */
+}
+
+.dark .tabulator .tabulator-header .tabulator-col .tabulator-selectrow.tabulator-selectrow-selected {
+    background-color: #3b82f6 !important; /* blue-500 */
+    border-color: #1d4ed8 !important; /* blue-700 */
+}
+
+/* Hover states para checkboxes */
+.dark .tabulator .tabulator-selectrow:hover {
+    background-color: #4b5563 !important; /* gray-600 */
+    border-color: #9ca3af !important; /* gray-400 */
+}
+
+/* Scroll bars en dark mode */
+.dark .tabulator .tabulator-tableHolder::-webkit-scrollbar {
+    @apply w-2 h-2 !important;
+}
+
+.dark .tabulator .tabulator-tableHolder::-webkit-scrollbar-track {
+    @apply bg-gray-700 !important;
+}
+
+.dark .tabulator .tabulator-tableHolder::-webkit-scrollbar-thumb {
+    @apply bg-gray-500 rounded !important;
+}
+
+.dark .tabulator .tabulator-tableHolder::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 !important;
+}
+
+/* Inputs y selects en modo edición */
+.tabulator .tabulator-edit-box input,
+.tabulator .tabulator-edit-box select {
+    @apply bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-500 !important;
+}
+
+/* Forzar colores específicos para elementos que no responden a @apply */
+.dark .tabulator * {
+    color: #f9fafb !important;
+}
+
+.dark .tabulator .tabulator-header * {
+    color: #f9fafb !important;
+}
+
+.dark .tabulator .tabulator-footer * {
+    color: #f9fafb !important;
+}
+
+/* Excepciones para mantener algunos elementos en color apropiado */
+.dark .tabulator .tabulator-footer .tabulator-page.active * {
+    color: #ffffff !important;
+}
+
+/* ESTILOS DE FUERZA MÁXIMA PARA DARK MODE */
+/* Sobrescribir cualquier estilo que Tabulator pueda estar aplicando */
+html.dark .tabulator,
+html.dark .tabulator *,
+.dark .tabulator,
+.dark .tabulator * {
+    color: #f9fafb !important;
+}
+
+html.dark .tabulator .tabulator-row,
+.dark .tabulator .tabulator-row {
+    background-color: #1f2937 !important;
+    color: #f9fafb !important;
+}
+
+html.dark .tabulator .tabulator-row.tabulator-row-even,
+.dark .tabulator .tabulator-row.tabulator-row-even {
+    background-color: #111827 !important;
+    color: #f9fafb !important;
+}
+
+html.dark .tabulator .tabulator-cell,
+.dark .tabulator .tabulator-cell {
+    background-color: inherit !important;
+    color: #f9fafb !important;
+    border-color: #374151 !important;
+}
+
+html.dark .tabulator .tabulator-header,
+.dark .tabulator .tabulator-header {
+    background-color: #374151 !important;
+    color: #f9fafb !important;
+}
+
+html.dark .tabulator .tabulator-footer,
+.dark .tabulator .tabulator-footer {
+    background-color: #374151 !important;
+    color: #f9fafb !important;
+}

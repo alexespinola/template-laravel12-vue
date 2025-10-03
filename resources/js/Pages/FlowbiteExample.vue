@@ -1,6 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DatePicker from '@/Components/DatePicker.vue';
+import TabulatorTable from '@/Components/TabulatorTable.vue';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import {
@@ -18,7 +19,7 @@ import {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faStar, faHeart, faCheck, faExclamationTriangle, faInfoCircle,
-    faUser, faHome, faCog, faCalendar, faSearch, faPlus
+    faUser, faHome, faCog, faCalendar, faSearch, faPlus, faTrash, faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faHeart as faHeartRegular,
@@ -29,7 +30,7 @@ import { faGithub, faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-b
 
 library.add(
     faStar, faHeart, faCheck, faExclamationTriangle, faInfoCircle,
-    faUser, faHome, faCog, faCalendar, faSearch, faPlus,
+    faUser, faHome, faCog, faCalendar, faSearch, faPlus, faTrash, faDownload,
     faHeartRegular, faUserRegular, faCalendarRegular,
     faGithub, faTwitter, faFacebook, faLinkedin
 );
@@ -38,9 +39,90 @@ const inputValue = ref('');
 const showModal = ref(false);
 const selectedDate = ref('DD/MM/YYYY');
 
+// Referencias y datos para Tabulator
+const tabulatorRef = ref(null);
+const tableData = ref([
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active', created_at: '2024-01-15' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active', created_at: '2024-01-16' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Manager', status: 'Inactive', created_at: '2024-01-17' },
+    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'User', status: 'Active', created_at: '2024-01-18' },
+]);
+const tableColumns = ref([
+    { title: 'ID', field: 'id', width: 80, sorter: 'number' },
+    { title: 'Name', field: 'name', sorter: 'string' },
+    { title: 'Email', field: 'email', sorter: 'string' },
+    { title: 'Role', field: 'role', sorter: 'string' },
+    { title: 'Status', field: 'status', sorter: 'string' },
+    { title: 'Created', field: 'created_at', sorter: 'date' }
+]);
+
+const tableOptions = ref({
+    rowHeader:{
+        headerSort:false,
+        resizable: false,
+        frozen:true,
+        headerHozAlign:"center",
+        hozAlign:"center",
+        formatter:"rowSelection",
+        titleFormatter:"rowSelection",
+        cellClick:function(e, cell){
+            cell.getRow().toggleSelect();
+        }
+    },
+    height: 'auto',
+    layout: 'fitColumns',
+    responsiveLayout: 'hide',
+    pagination: 'local',
+    movableColumns: true,
+    resizableRows: true,
+    selectable: true,
+    tooltips: true,
+    addRowPos: 'top',
+    history: true
+});
+
 // Función para manejar cambios en el datepicker
 const onDateChange = (date) => {
     selectedDate.value = date;
+};
+
+// Funciones para Tabulator
+const addNewRow = () => {
+    if (tabulatorRef.value) {
+        const newId = Math.max(...tableData.value.map(row => row.id), 0) + 1;
+        tabulatorRef.value.addRow({
+            id: newId,
+            name: 'New User',
+            email: `user${newId}@example.com`,
+            role: 'User',
+            status: 'Active',
+            created_at: new Date().toISOString().split('T')[0]
+        });
+    }
+};
+
+const deleteSelected = () => {
+    if (tabulatorRef.value) {
+        tabulatorRef.value.deleteSelectedRows();
+    }
+};
+
+const downloadCSV = () => {
+    if (tabulatorRef.value) {
+        tabulatorRef.value.downloadCSV();
+    }
+};
+
+const onRowClick = (rowData) => {
+    console.log('Row clicked:', rowData);
+};
+
+const onRowSelected = (selectedRows) => {
+    console.log('Rows selected:', selectedRows);
+};
+
+const onCellEdited = (cellData) => {
+    console.log('Cell edited:', cellData);
 };
 </script>
 
@@ -69,6 +151,51 @@ const onDateChange = (date) => {
                                     v-model="selectedDate"
                                     placeholder="Select date"
                                     @change="onDateChange"
+                                />
+                            </div>
+
+                            <hr>
+
+                            <!-- Tabulator Table Component -->
+                            <div class="mb-6">
+                                <h2 class="section-title">Tabulator Table Component</h2>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                                    Interactive data table with sorting, filtering, pagination, and editing capabilities.
+                                </p>
+
+                                <div class="mb-4 flex gap-2 flex-wrap">
+                                    <button
+                                        @click="addNewRow"
+                                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                    >
+                                        <font-awesome-icon icon="plus" class="mr-2" />
+                                        Add Row
+                                    </button>
+                                    <button
+                                        @click="deleteSelected"
+                                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                    >
+                                        <font-awesome-icon icon="trash" class="mr-2" />
+                                        Delete Selected
+                                    </button>
+                                    <button
+                                        @click="downloadCSV"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                    >
+                                        <font-awesome-icon icon="download" class="mr-2" />
+                                        Download CSV
+                                    </button>
+                                </div>
+
+                                <TabulatorTable
+                                    ref="tabulatorRef"
+                                    title="Table example"
+                                    :data="tableData"
+                                    :columns="tableColumns"
+                                    :options="tableOptions"
+                                    @row-click="onRowClick"
+                                    @row-selected="onRowSelected"
+                                    @cell-edited="onCellEdited"
                                 />
                             </div>
 
