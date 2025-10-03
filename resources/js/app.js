@@ -5,9 +5,8 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-
-// Importar Flowbite
 import 'flowbite';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 // Inicializar tema global inmediatamente
 if (typeof window !== 'undefined') {
@@ -20,7 +19,7 @@ if (typeof window !== 'undefined') {
     }
 }
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || '';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -33,6 +32,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },
     progress: {

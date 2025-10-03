@@ -1,198 +1,184 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import Sidebar from '@/Components/Sidebar.vue';
 import { Link } from '@inertiajs/vue3';
+import { useTheme } from '@/composables/useTheme.js';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faBars, faTimes, faSun, faMoon, faSignOutAlt, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import {
+    faUser as faUserRegular,
+    faCalendar as faCalendarRegular
+} from '@fortawesome/free-regular-svg-icons';
+library.add(faBars, faTimes, faSun, faMoon, faSignOutAlt, faChevronDown, faUserRegular, faCalendarRegular);
+// Usar el composable del tema
+const { isDarkMode, toggleDarkMode, initializeTheme } = useTheme();
+import {
+    FwbAlert,
+    FwbButton,
+    FwbDropdown,
+    FwbListGroup,
+    FwbListGroupItem
+} from 'flowbite-vue';
 
-const showingNavigationDropdown = ref(false);
+const appName = import.meta.env.VITE_APP_NAME || '';
+
+// Inicializar tema inmediatamente para evitar parpadeo
+if (typeof window !== 'undefined') {
+    initializeTheme();
+}
+
+// Función para detectar si es dispositivo pequeño
+const isSmallDevice = () => {
+    if (typeof window !== 'undefined') {
+        return window.innerWidth < 640; // Tailwind's 'sm' breakpoint
+    }
+    return false;
+};
+
+// Estados reactivos - sidebar cerrado por defecto en dispositivos pequeños
+const sidebarOpen = ref(!isSmallDevice());
+const showUserDropdown = ref(false);
+
+// Función para alternar el sidebar
+const toggleSidebar = () => {
+    sidebarOpen.value = !sidebarOpen.value;
+};
+
+// Función para manejar el cambio de tamaño de ventana
+const handleResize = () => {
+    if (isSmallDevice()) {
+        sidebarOpen.value = false;
+    } else {
+        sidebarOpen.value = true;
+    }
+};
+
+// Inicializar cuando se monta el componente
+onMounted(() => {
+    // Agregar listener para cambio de tamaño de ventana
+    window.addEventListener('resize', handleResize);
+});
+
+// Limpiar listener al desmontar
+onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+});
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav
-                class="border-b border-gray-100 bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
-                <!-- Primary Navigation Menu -->
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 justify-between">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="flex shrink-0 items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
-                                </Link>
-                            </div>
-
-                            <!-- Navigation Links -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:ms-6 sm:flex sm:items-center">
-                            <!-- Settings Dropdown -->
-                            <div class="relative ms-3">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink
-                                            :href="route('profile.edit')"
-                                        >
-                                            Profile
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            :href="route('logout')"
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button
-                                @click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
-                                class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-gray-900 dark:hover:text-gray-400 dark:focus:bg-gray-900 dark:focus:text-gray-400"
-                            >
-                                <svg
-                                    class="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{
-                        block: showingNavigationDropdown,
-                        hidden: !showingNavigationDropdown,
-                    }"
-                    class="sm:hidden"
-                >
-                    <div class="space-y-1 pb-3 pt-2">
-                        <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
+    <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <!-- Navbar superior -->
+        <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <div class="px-3 py-3 lg:px-5 lg:pl-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-start">
+                        <!-- Botón toggle sidebar -->
+                        <button
+                            @click="toggleSidebar"
+                            type="button"
+                            class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         >
-                            Dashboard
-                        </ResponsiveNavLink>
+                            <font-awesome-icon :icon="['fas', 'bars']" class="w-6 h-6" />
+                        </button>
+
+                        <!-- Logo -->
+                        <Link :href="route('dashboard')" class="flex ml-2 md:mr-24">
+                            <ApplicationLogo class="h-8 mr-3" />
+                            <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                                {{appName}}
+                            </span>
+                        </Link>
                     </div>
 
-                    <!-- Responsive Settings Options -->
-                    <div
-                        class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600"
-                    >
-                        <div class="px-4">
-                            <div
-                                class="text-base font-medium text-gray-800 dark:text-gray-200"
+                    <div class="flex items-center">
+                        <div class="flex items-center ml-3 space-x-3">
+                            <!-- Toggle dark mode -->
+                            <button
+                                @click="toggleDarkMode"
+                                type="button"
+                                class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2"
+                                :title="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
                             >
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="text-sm font-medium text-gray-500">
-                                {{ $page.props.auth.user.email }}
-                            </div>
-                        </div>
+                                <!-- Icono de luna (modo oscuro activo) -->
+                                <font-awesome-icon
+                                    v-if="isDarkMode"
+                                    :icon="['fas', 'moon']"
+                                    class="w-5 h-5"
+                                />
+                                <!-- Icono de sol (modo claro activo) -->
+                                <font-awesome-icon
+                                    v-else
+                                    :icon="['fas', 'sun']"
+                                    class="w-5 h-5"
+                                />
+                            </button>
 
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
+                            <!-- Dropdown usuario -->
+                            <fwb-dropdown align-to-end placement="bottom">
+                                <template #trigger>
+                                    <fwb-button color="light" class="border-0 focus:ring-0">
+                                        <font-awesome-icon :icon="['far', 'user']" class="w-5 h-5" />
+                                    </fwb-button>
+                                </template>
+                                <!-- <nav class="py-2 text-sm text-gray-700 dark:text-gray-200"> -->
+                                    <fwb-list-group >
+                                        <fwb-list-group-item>
+                                            <div class="">
+                                                <span class="block text-sm text-gray-900 dark:text-white font-medium">{{ $page.props.auth.user.name }}</span>
+                                                <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ $page.props.auth.user.email }}</span>
+                                            </div>
+                                        </fwb-list-group-item>
+                                        <fwb-list-group-item>
+                                            <Link
+                                                :href="route('logout')"
+                                                method="post"
+                                                as="button"
+                                                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-colors duration-150"
+                                                @click="showUserDropdown = false"
+                                            >
+                                                <div class="flex items-right">
+                                                    <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="w-4 h-4 mr-2" />
+                                                    Log Out
+                                                </div>
+                                            </Link>
+                                        </fwb-list-group-item>
+                                    </fwb-list-group>
+                                <!-- </nav> -->
+                            </fwb-dropdown>
                         </div>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </nav>
 
-            <!-- Page Heading -->
-            <header
-                class="bg-white shadow dark:bg-gray-800"
-                v-if="$slots.header"
-            >
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
-            </header>
+        <!-- Sidebar -->
+        <Sidebar :sidebar-open="sidebarOpen" />
 
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
+        <!-- Contenido principal -->
+        <div :class="['p-4 transition-all duration-300', sidebarOpen ? 'sm:ml-64' : 'ml-0']">
+            <div class="p-2 mt-14">
+                <!-- Page Heading -->
+                <header v-if="$slots.header" class="bg-white rounded-lg shadow dark:bg-gray-800 mb-4">
+                    <div class="px-4 py-4 sm:px-4 lg:px-2">
+                        <slot name="header" />
+                    </div>
+                </header>
+
+                <!-- Page Content -->
+                <main class="bg-white rounded-lg shadow dark:bg-gray-800">
+                    <div class="px-4 py-4 sm:px-4 lg:px-2">
+                        <slot />
+                    </div>
+                </main>
+            </div>
         </div>
+
+        <!-- Overlay para móvil -->
+        <div
+            v-if="sidebarOpen"
+            @click="sidebarOpen = false"
+            class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-30 sm:hidden"
+        ></div>
     </div>
 </template>

@@ -1,18 +1,189 @@
+<script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import DatePicker from '@/Components/DatePicker.vue';
+import { Head } from '@inertiajs/vue3';
+import { ref } from 'vue';
+import {
+    FwbAlert,
+    FwbButton,
+    FwbCard,
+    FwbInput,
+    FwbModal,
+    FwbDropdown,
+    FwbListGroup,
+    FwbListGroupItem
+} from 'flowbite-vue';
+// FontAwesome
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+    faStar, faHeart, faCheck, faExclamationTriangle, faInfoCircle,
+    faUser, faHome, faCog, faCalendar, faSearch, faPlus
+} from '@fortawesome/free-solid-svg-icons';
+import {
+    faHeart as faHeartRegular,
+    faUser as faUserRegular,
+    faCalendar as faCalendarRegular
+} from '@fortawesome/free-regular-svg-icons';
+import { faGithub, faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+
+library.add(
+    faStar, faHeart, faCheck, faExclamationTriangle, faInfoCircle,
+    faUser, faHome, faCog, faCalendar, faSearch, faPlus,
+    faHeartRegular, faUserRegular, faCalendarRegular,
+    faGithub, faTwitter, faFacebook, faLinkedin
+);
+
+const inputValue = ref('');
+const showModal = ref(false);
+const selectedDate = ref('DD/MM/YYYY');
+
+// Función para manejar cambios en el datepicker
+const onDateChange = (date) => {
+    selectedDate.value = date;
+};
+</script>
+
+
 <template>
     <div>
         <Head title="Flowbite Example" />
 
-        <AuthenticatedLayout2>
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <AuthenticatedLayout>
+            <template #header>
+                <h2 class="mx-auto sm:px-6 lg:px-2  font-semibold text-xl text-gray-800 dark:text-gray-200 ">
+                    Flowbite Components Example
+                </h2>
+            </template>
+
+            <div class="py-5">
+                <div class="max-w-8xl mx-auto sm:px-4 lg:px-2">
                     <div class="content-container">
                         <div class="p-6">
                             <h1 class="page-title">Flowbite Components Example</h1>
 
+                            <!-- DatePicker Component -->
+                            <div class="mb-6">
+                                <h2 class="section-title">DatePicker Component</h2>
+                                <DatePicker
+                                    v-model="selectedDate"
+                                    placeholder="Select date"
+                                    @change="onDateChange"
+                                />
+                            </div>
+
+                            <!-- FontAwesome Icons -->
+                            <div class="mb-6">
+                                <h2 class="section-title">FontAwesome Icons</h2>
+                                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                                    <!-- Solid Icons -->
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon icon="user" class="text-2xl text-blue-500 mb-2" />
+                                        <p class="text-xs">fas user</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon icon="home" class="text-2xl text-green-500 mb-2" />
+                                        <p class="text-xs">fas home</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon icon="cog" class="text-2xl text-yellow-500 mb-2" />
+                                        <p class="text-xs">fas cog</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon icon="calendar" class="text-2xl text-purple-500 mb-2" />
+                                        <p class="text-xs">fas calendar</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon icon="search" class="text-2xl text-red-500 mb-2" />
+                                        <p class="text-xs">fas search</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon icon="plus" class="text-2xl text-indigo-500 mb-2" />
+                                        <p class="text-xs">fas plus</p>
+                                    </div>
+
+                                    <!-- Regular Icons -->
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon :icon="['far', 'user']" class="text-2xl text-gray-500 mb-2" />
+                                        <p class="text-xs">far user</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon :icon="['far', 'calendar']" class="text-2xl text-gray-500 mb-2" />
+                                        <p class="text-xs">far calendar</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon :icon="['far', 'heart']" class="text-2xl text-pink-500 mb-2" />
+                                        <p class="text-xs">far heart</p>
+                                    </div>
+
+                                    <!-- Brand Icons -->
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon :icon="['fab', 'github']" class="text-2xl text-gray-800 dark:text-white mb-2" />
+                                        <p class="text-xs">fab github</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon :icon="['fab', 'twitter']" class="text-2xl text-blue-400 mb-2" />
+                                        <p class="text-xs">fab twitter</p>
+                                    </div>
+                                    <div class="text-center p-4 border rounded-lg dark:border-gray-600">
+                                        <font-awesome-icon :icon="['fab', 'linkedin']" class="text-2xl text-blue-600 mb-2" />
+                                        <p class="text-xs">fab linkedin</p>
+                                    </div>
+                                </div>
+
+                                <!-- Icon Sizes -->
+                                <div class="mt-6">
+                                    <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Icon Sizes</h3>
+                                    <div class="flex items-center space-x-4">
+                                        <font-awesome-icon icon="star" class="text-xs text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-sm text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-base text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-lg text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-xl text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-2xl text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-3xl text-yellow-500" />
+                                        <font-awesome-icon icon="star" class="text-4xl text-yellow-500" />
+                                    </div>
+                                </div>
+
+                                <!-- Spinning Icons -->
+                                <div class="mt-6">
+                                    <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Animated Icons</h3>
+                                    <div class="flex items-center space-x-4">
+                                        <font-awesome-icon icon="cog" spin class="text-2xl text-blue-500" />
+                                        <font-awesome-icon icon="search" pulse class="text-2xl text-green-500" />
+                                        <font-awesome-icon icon="heart" beat class="text-2xl text-red-500" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dropdown Component -->
+                            <div class="mb-6">
+                                <h2 class="section-title">Dropdown Component</h2>
+                                <fwb-dropdown placement="bottom">
+                                    <template #trigger>
+                                        <fwb-button color="light">
+                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                                            <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                            </svg>
+                                        </fwb-button>
+                                    </template>
+                                    <!-- <nav class="py-2 text-sm text-gray-700 dark:text-gray-200"> -->
+                                        <fwb-list-group >
+                                            <fwb-list-group-item>
+                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                            </fwb-list-group-item>
+                                            <fwb-list-group-item>
+                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                            </fwb-list-group-item>
+                                        </fwb-list-group>
+                                    <!-- </nav> -->
+                                </fwb-dropdown>
+                            </div>
+
                             <!-- Alert Component -->
                             <div class="mb-6">
                                 <h2 class="section-title">Alert Component</h2>
-                                <fwb-alert type="success" closable>
+                                <fwb-alert type="success" closable icon class="dark:bg-gray-700">
                                     ¡Flowbite se ha instalado correctamente!
                                 </fwb-alert>
                             </div>
@@ -84,7 +255,7 @@
                             <!-- Card Component -->
                             <div class="mb-6">
                                 <h2 class="section-title">Card Component</h2>
-                                <fwb-card class="max-w-sm">
+                                <fwb-card class="max-w-sm p-3">
                                     <template #header>
                                         <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                             Noteworthy technology acquisitions 2021
@@ -115,8 +286,35 @@
                                         label="Email"
                                         placeholder="example@email.com"
                                         type="email"
+                                        validation-status=""
+                                        label-class="dark:text-gray-200"
                                     />
                                     <p class="mt-2 text-sm secondary-text">Valor actual: {{ inputValue }}</p>
+
+
+                                    <fwb-input
+                                        v-model="inputValue"
+                                        label="Your name"
+                                        placeholder="Success input"
+                                        required
+                                        validation-status="success"
+                                    >
+                                        <template #validationMessage>
+                                        <span class="font-medium">Well done!</span> Some success message.
+                                        </template>
+                                    </fwb-input>
+
+                                    <fwb-input
+                                        v-model="inputValue"
+                                        label="Your name"
+                                        placeholder="Error input"
+                                        required
+                                        validation-status="error"
+                                    >
+                                        <template #validationMessage>
+                                        <span class="font-medium">Oh, snapp!</span> Some error message.
+                                        </template>
+                                    </fwb-input>
                                 </div>
                             </div>
 
@@ -147,26 +345,12 @@
                                     </template>
                                 </fwb-modal>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout2>
+        </AuthenticatedLayout>
     </div>
 </template>
 
-<script setup>
-import AuthenticatedLayout2 from '@/Layouts/AuthenticatedLayout2.vue';
-import { Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
-import {
-    FwbAlert,
-    FwbButton,
-    FwbCard,
-    FwbInput,
-    FwbModal
-} from 'flowbite-vue';
-
-const inputValue = ref('');
-const showModal = ref(false);
-</script>
