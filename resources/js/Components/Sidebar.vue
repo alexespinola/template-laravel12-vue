@@ -33,7 +33,7 @@ defineProps({
                             route().current('dashboard') ? 'bg-gray-100 dark:bg-gray-700' : ''
                         ]"
                     >
-                        <font-awesome-icon
+                        <FontAwesomeIcon
                             icon="home"
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         />
@@ -50,7 +50,7 @@ defineProps({
                             route().current('ui.example') ? 'bg-gray-100 dark:bg-gray-700' : ''
                         ]"
                     >
-                        <font-awesome-icon
+                        <FontAwesomeIcon
                             icon="edit"
                             class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         />
@@ -60,7 +60,7 @@ defineProps({
 
                 <!-- Línea separadora -->
                 <li>
-                    <hr class="my-4 border-gray-200 dark:border-gray-700">
+                    <hr class="my-4 border-gray-200 dark:border-gray-700" />
                 </li>
 
                 <!-- Profile -->
@@ -72,7 +72,7 @@ defineProps({
                             route().current('profile.edit') ? 'bg-gray-100 dark:bg-gray-700' : ''
                         ]"
                     >
-                        <font-awesome-icon
+                        <FontAwesomeIcon
                             icon="user"
                             class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         />
@@ -83,7 +83,7 @@ defineProps({
                 <!-- Settings -->
                 <li>
                     <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <font-awesome-icon
+                        <FontAwesomeIcon
                             icon="cog"
                             class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                         />

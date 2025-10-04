@@ -1,14 +1,14 @@
 <template>
     <div class="relative max-w-sm">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-            <font-awesome-icon
+            <FontAwesomeIcon
                 icon="calendar"
                 class="w-4 h-4 text-gray-500 dark:text-gray-400"
             />
         </div>
         <input
-            ref="datepickerInput"
             :id="inputId"
+            ref="datepickerInput"
             datepicker
             type="text"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -16,7 +16,7 @@
             :value="modelValue"
             @input="handleInput"
             @change="handleChange"
-        >
+        />
     </div>
 </template>
 
@@ -92,6 +92,7 @@ const initializeFlowbite = async () => {
             // Agregar listener personalizado para detectar cambios del datepicker
             setupDatepickerListener();
         } catch (error) {
+            // Silenciar el error en modo producción
             console.error('Error al inicializar DatePicker:', error);
         }
     }
@@ -124,7 +125,7 @@ const setupDatepickerListener = () => {
             if (event.target.matches('[data-date]') || event.target.closest('[data-date]')) {
                 setTimeout(() => {
                     // Verificar que el elemento aún existe
-                    if (!datepickerInput.value) return;
+                    if (!datepickerInput.value) {return;}
 
                     const currentValue = datepickerInput.value.value || '';
                     if (currentValue !== props.modelValue) {

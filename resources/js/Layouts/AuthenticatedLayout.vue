@@ -14,7 +14,6 @@ library.add(faBars, faTimes, faSun, faMoon, faSignOutAlt, faChevronDown, faUserR
 // Usar el composable del tema
 const { isDarkMode, toggleDarkMode, initializeTheme } = useTheme();
 import {
-    FwbAlert,
     FwbButton,
     FwbDropdown,
     FwbListGroup,
@@ -75,18 +74,18 @@ onUnmounted(() => {
                     <div class="flex items-center justify-start">
                         <!-- Botón toggle sidebar -->
                         <button
-                            @click="toggleSidebar"
                             type="button"
                             class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            @click="toggleSidebar"
                         >
-                            <font-awesome-icon :icon="['fas', 'bars']" class="w-6 h-6" />
+                            <FontAwesomeIcon :icon="['fas', 'bars']" class="w-6 h-6" />
                         </button>
 
                         <!-- Logo -->
                         <Link :href="route('dashboard')" class="flex ml-2 md:mr-24">
                             <ApplicationLogo class="h-8 mr-3" />
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                                {{appName}}
+                                {{ appName }}
                             </span>
                         </Link>
                     </div>
@@ -95,19 +94,19 @@ onUnmounted(() => {
                         <div class="flex items-center ml-3 space-x-3">
                             <!-- Toggle dark mode -->
                             <button
-                                @click="toggleDarkMode"
                                 type="button"
                                 class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2"
                                 :title="isDarkMode ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+                                @click="toggleDarkMode"
                             >
                                 <!-- Icono de luna (modo oscuro activo) -->
-                                <font-awesome-icon
+                                <FontAwesomeIcon
                                     v-if="isDarkMode"
                                     :icon="['fas', 'moon']"
                                     class="w-5 h-5"
                                 />
                                 <!-- Icono de sol (modo claro activo) -->
-                                <font-awesome-icon
+                                <FontAwesomeIcon
                                     v-else
                                     :icon="['fas', 'sun']"
                                     class="w-5 h-5"
@@ -118,32 +117,32 @@ onUnmounted(() => {
                             <fwb-dropdown align-to-end placement="bottom">
                                 <template #trigger>
                                     <fwb-button color="light" class="border-0 focus:ring-0">
-                                        <font-awesome-icon :icon="['far', 'user']" class="w-5 h-5" />
+                                        <FontAwesomeIcon :icon="['far', 'user']" class="w-5 h-5" />
                                     </fwb-button>
                                 </template>
                                 <!-- <nav class="py-2 text-sm text-gray-700 dark:text-gray-200"> -->
-                                    <fwb-list-group >
-                                        <fwb-list-group-item>
-                                            <div class="">
-                                                <span class="block text-sm text-gray-900 dark:text-white font-medium">{{ $page.props.auth.user.name }}</span>
-                                                <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ $page.props.auth.user.email }}</span>
+                                <fwb-list-group>
+                                    <fwb-list-group-item>
+                                        <div class="">
+                                            <span class="block text-sm text-gray-900 dark:text-white font-medium">{{ $page.props.auth.user.name }}</span>
+                                            <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ $page.props.auth.user.email }}</span>
+                                        </div>
+                                    </fwb-list-group-item>
+                                    <fwb-list-group-item>
+                                        <Link
+                                            :href="route('logout')"
+                                            method="post"
+                                            as="button"
+                                            class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-colors duration-150"
+                                            @click="showUserDropdown = false"
+                                        >
+                                            <div class="flex items-right">
+                                                <FontAwesomeIcon :icon="['fas', 'sign-out-alt']" class="w-4 h-4 mr-2" />
+                                                Log Out
                                             </div>
-                                        </fwb-list-group-item>
-                                        <fwb-list-group-item>
-                                            <Link
-                                                :href="route('logout')"
-                                                method="post"
-                                                as="button"
-                                                class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white transition-colors duration-150"
-                                                @click="showUserDropdown = false"
-                                            >
-                                                <div class="flex items-right">
-                                                    <font-awesome-icon :icon="['fas', 'sign-out-alt']" class="w-4 h-4 mr-2" />
-                                                    Log Out
-                                                </div>
-                                            </Link>
-                                        </fwb-list-group-item>
-                                    </fwb-list-group>
+                                        </Link>
+                                    </fwb-list-group-item>
+                                </fwb-list-group>
                                 <!-- </nav> -->
                             </fwb-dropdown>
                         </div>
@@ -161,14 +160,14 @@ onUnmounted(() => {
                 <!-- Page Heading -->
                 <header v-if="$slots.header" class="bg-white rounded-lg shadow dark:bg-gray-800 mb-4">
                     <div class="px-4 py-4 sm:px-4 lg:px-2">
-                        <slot name="header" />
+                        <slot name="header"></slot>
                     </div>
                 </header>
 
                 <!-- Page Content -->
                 <main class="bg-white rounded-lg shadow dark:bg-gray-800">
                     <div class="px-4 py-4 sm:px-4 lg:px-2">
-                        <slot />
+                        <slot></slot>
                     </div>
                 </main>
             </div>
@@ -177,8 +176,8 @@ onUnmounted(() => {
         <!-- Overlay para móvil -->
         <div
             v-if="sidebarOpen"
-            @click="sidebarOpen = false"
             class="bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-30 sm:hidden"
+            @click="sidebarOpen = false"
         ></div>
     </div>
 </template>

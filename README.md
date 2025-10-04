@@ -481,6 +481,38 @@ npm install --save-dev @vue/test-utils vitest jsdom
 npm run test
 ```
 
+### Linting
+
+```bash
+
+# Analizar todo el código JavaScript/Vue
+npm run lint
+
+# Analizar y corregir automáticamente todo el código
+npm run lint:fix
+
+# Analizar solo archivos JavaScript/Vue en resources/js
+npm run lint:js
+
+# Analizar y corregir automáticamente solo JS/Vue
+npm run lint:js:fix
+
+```
+### ESLint Commands
+
+```bash
+# Analizar un archivo específico
+npx eslint resources/js/Pages/Welcome.vue
+
+# Corregir automáticamente un archivo específico
+npx eslint resources/js/Pages/Welcome.vue --fix
+
+# Analizar toda la carpeta resources/js
+npx eslint resources/js/**/*.{js,vue}
+
+# Corregir toda la carpeta resources/js
+npx eslint resources/js/**/*.{js,vue} --fix
+```
 ---
 
 ## 🤝 Contributing

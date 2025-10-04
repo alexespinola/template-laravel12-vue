@@ -8,12 +8,12 @@ import { Head, useForm } from '@inertiajs/vue3';
 
 defineProps({
     status: {
-        type: String,
-    },
+        type: String
+    }
 });
 
 const form = useForm({
-    email: '',
+    email: ''
 });
 
 const submit = () => {
@@ -44,9 +44,9 @@ const submit = () => {
 
                 <TextInput
                     id="email"
+                    v-model="form.email"
                     type="email"
                     class="mt-1 block w-full"
-                    v-model="form.email"
                     required
                     autofocus
                     autocomplete="username"

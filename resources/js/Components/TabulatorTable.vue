@@ -44,7 +44,7 @@ let tabulator = null;
 
 // Inicializar Tabulator
 const initTabulator = () => {
-    if (!tabulatorEl.value) return;
+    if (!tabulatorEl.value) {return;}
 
     // Configuración base
     const defaultOptions = {
@@ -70,7 +70,7 @@ const initTabulator = () => {
         rowClick: (e, row) => {
             emit('row-click', row.getData());
         },
-        rowSelectionChanged: (data, rows) => {
+        rowSelectionChanged: (data) => {
             emit('row-selected', data);
         },
         cellEdited: (cell) => {

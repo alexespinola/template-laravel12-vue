@@ -12,7 +12,7 @@ const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
 
 const form = useForm({
-    password: '',
+    password: ''
 });
 
 const confirmUserDeletion = () => {
@@ -26,7 +26,7 @@ const deleteUser = () => {
         preserveScroll: true,
         onSuccess: () => closeModal(),
         onError: () => passwordInput.value.focus(),
-        onFinish: () => form.reset(),
+        onFinish: () => form.reset()
     });
 };
 

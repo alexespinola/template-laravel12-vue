@@ -7,83 +7,83 @@ export const initTooltips = vi.fn();
 export const initPopovers = vi.fn();
 
 export const Datepicker = class MockDatepicker {
-  constructor(element, options = {}) {
-    this.element = element;
-    this.options = options;
-    this._selectedDate = null;
-  }
-
-  setDate(date) {
-    this._selectedDate = date;
-    if (typeof this.options.onSelect === 'function') {
-      this.options.onSelect(date);
+    constructor(element, options = {}) {
+        this.element = element;
+        this.options = options;
+        this._selectedDate = null;
     }
-  }
 
-  getDate() {
-    return this._selectedDate;
-  }
+    setDate(date) {
+        this._selectedDate = date;
+        if (typeof this.options.onSelect === 'function') {
+            this.options.onSelect(date);
+        }
+    }
 
-  show() {
+    getDate() {
+        return this._selectedDate;
+    }
+
+    show() {
     // Mock show behavior
-  }
+    }
 
-  hide() {
+    hide() {
     // Mock hide behavior
-  }
+    }
 
-  destroy() {
+    destroy() {
     // Mock destroy behavior
-  }
+    }
 };
 
 export const Modal = class MockModal {
-  constructor(element, options = {}) {
-    this.element = element;
-    this.options = options;
-  }
+    constructor(element, options = {}) {
+        this.element = element;
+        this.options = options;
+    }
 
-  show() {
+    show() {
     // Mock show behavior
-  }
+    }
 
-  hide() {
+    hide() {
     // Mock hide behavior
-  }
+    }
 
-  toggle() {
+    toggle() {
     // Mock toggle behavior
-  }
+    }
 };
 
 export const Dropdown = class MockDropdown {
-  constructor(element, options = {}) {
-    this.element = element;
-    this.options = options;
-  }
+    constructor(element, options = {}) {
+        this.element = element;
+        this.options = options;
+    }
 
-  show() {
+    show() {
     // Mock show behavior
-  }
+    }
 
-  hide() {
+    hide() {
     // Mock hide behavior
-  }
+    }
 
-  toggle() {
+    toggle() {
     // Mock toggle behavior
-  }
+    }
 };
 
 // Mock por defecto
 export default {
-  initFlowbite,
-  initDatepickers,
-  initDropdowns,
-  initModals,
-  initTooltips,
-  initPopovers,
-  Datepicker,
-  Modal,
-  Dropdown,
+    initFlowbite,
+    initDatepickers,
+    initDropdowns,
+    initModals,
+    initTooltips,
+    initPopovers,
+    Datepicker,
+    Modal,
+    Dropdown
 };

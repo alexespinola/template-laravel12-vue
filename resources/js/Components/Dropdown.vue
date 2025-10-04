@@ -4,16 +4,16 @@ import { computed, onMounted, onUnmounted, ref } from 'vue';
 const props = defineProps({
     align: {
         type: String,
-        default: 'right',
+        default: 'right'
     },
     width: {
         type: String,
-        default: '48',
+        default: '48'
     },
     contentClasses: {
         type: String,
-        default: 'py-1 bg-white dark:bg-gray-700',
-    },
+        default: 'py-1 bg-white dark:bg-gray-700'
+    }
 });
 
 const closeOnEscape = (e) => {
@@ -27,7 +27,7 @@ onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 
 const widthClass = computed(() => {
     return {
-        48: 'w-48',
+        48: 'w-48'
     }[props.width.toString()];
 });
 
@@ -47,7 +47,7 @@ const open = ref(false);
 <template>
     <div class="relative">
         <div @click="open = !open">
-            <slot name="trigger" />
+            <slot name="trigger"></slot>
         </div>
 
         <!-- Full Screen Dropdown Overlay -->
@@ -76,7 +76,7 @@ const open = ref(false);
                     class="rounded-md ring-1 ring-black ring-opacity-5"
                     :class="contentClasses"
                 >
-                    <slot name="content" />
+                    <slot name="content"></slot>
                 </div>
             </div>
         </Transition>

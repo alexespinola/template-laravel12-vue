@@ -5,7 +5,7 @@
             <h1 v-if="title" class="page-title">{{ title }}</h1>
 
             <!-- Slot para contenido personalizado -->
-            <slot />
+            <slot></slot>
         </div>
     </div>
 </template>

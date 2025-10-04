@@ -5,11 +5,11 @@
         <template #header>
             <div class="flex items-center justify-between px-4">
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    <font-awesome-icon icon="home" class="mr-2" />
+                    <FontAwesomeIcon icon="home" class="mr-2" />
                     Dashboard - Template Laravel Vue.js
                 </h2>
                 <fwb-button color="blue" @click="showWelcomeAlert">
-                    <font-awesome-icon icon="info-circle" class="mr-2" />
+                    <FontAwesomeIcon icon="info-circle" class="mr-2" />
                     Project Info
                 </fwb-button>
             </div>
@@ -21,7 +21,7 @@
                 <!-- Welcome Alert -->
                 <fwb-alert v-if="showAlert" type="success" icon @close="showAlert = false">
                     <template #icon>
-                        <font-awesome-icon icon="rocket" />
+                        <FontAwesomeIcon icon="rocket" />
                     </template>
                     <span class="font-medium">¡Bienvenido a License Hub!</span>
                     Aplicación moderna construida con Laravel 12, Vue 3, Inertia.js y componentes Flowbite.
@@ -36,7 +36,7 @@
                                 <h5 class="text-2xl font-bold text-white">Laravel</h5>
                                 <p class="text-red-100">v12.32.5</p>
                             </div>
-                            <font-awesome-icon icon="server" class="text-4xl text-red-100" />
+                            <FontAwesomeIcon icon="server" class="text-4xl text-red-100" />
                         </div>
                     </fwb-card>
 
@@ -47,7 +47,7 @@
                                 <h5 class="text-2xl font-bold text-white">Vue.js</h5>
                                 <p class="text-green-100">v3.4.0</p>
                             </div>
-                            <font-awesome-icon icon="code" class="text-4xl text-green-100" />
+                            <FontAwesomeIcon icon="code" class="text-4xl text-green-100" />
                         </div>
                     </fwb-card>
 
@@ -58,7 +58,7 @@
                                 <h5 class="text-2xl font-bold text-white">Inertia.js</h5>
                                 <p class="text-purple-100">v2.0.0</p>
                             </div>
-                            <font-awesome-icon icon="rocket" class="text-4xl text-purple-100" />
+                            <FontAwesomeIcon icon="rocket" class="text-4xl text-purple-100" />
                         </div>
                     </fwb-card>
 
@@ -69,7 +69,7 @@
                                 <h5 class="text-2xl font-bold text-white">Components</h5>
                                 <p class="text-blue-100">12+ Librerías integradas</p>
                             </div>
-                            <font-awesome-icon icon="cubes" class="text-4xl text-blue-100" />
+                            <FontAwesomeIcon icon="cubes" class="text-4xl text-blue-100" />
                         </div>
                     </fwb-card>
                 </div>
@@ -81,20 +81,20 @@
                     <fwb-card>
                         <template #header>
                             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                                <font-awesome-icon icon="star" class="mr-2 text-yellow-500" />
+                                <FontAwesomeIcon icon="star" class="mr-2 text-yellow-500" />
                                 Características del Proyecto
                             </h5>
                         </template>
 
                         <div class="space-y-3">
                             <div v-for="feature in features" :key="feature.name" class="flex items-center p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                                <font-awesome-icon :icon="feature.icon" :class="feature.color + ' text-lg mr-3'" />
+                                <FontAwesomeIcon :icon="feature.icon" :class="feature.color + ' text-lg mr-3'" />
                                 <div class="flex-1">
                                     <p class="font-medium text-gray-900 dark:text-white">{{ feature.name }}</p>
                                     <p class="text-sm text-gray-500 dark:text-gray-400">{{ feature.description }}</p>
                                 </div>
                                 <fwb-button size="xs" color="light" @click="showFeatureInfo(feature)">
-                                    <font-awesome-icon icon="info" />
+                                    <FontAwesomeIcon icon="info" />
                                 </fwb-button>
                             </div>
                         </div>
@@ -104,24 +104,24 @@
                     <fwb-card>
                         <template #header>
                             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                            <font-awesome-icon icon="star" class="mr-2 text-pink-500" />
+                                <FontAwesomeIcon icon="star" class="mr-2 text-pink-500" />
                                 Librerías de UI Instaladas
                             </h5>
                         </template>
 
                         <div class="space-y-3">
-                            <div v-for="library in uiLibraries" :key="library.name" class="flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <div v-for="uiLibrary in uiLibraries" :key="uiLibrary.name" class="flex items-center justify-between p-3 rounded-lg border border-gray-200 dark:border-gray-700">
                                 <div class="flex items-center">
-                                    <div :class="library.bgColor + ' p-2 rounded-lg mr-3'">
-                                        <font-awesome-icon :icon="library.icon" class="text-white" />
+                                    <div :class="uiLibrary.bgColor + ' p-2 rounded-lg mr-3'">
+                                        <FontAwesomeIcon :icon="uiLibrary.icon" class="text-white" />
                                     </div>
                                     <div>
-                                        <p class="font-medium text-gray-900 dark:text-white">{{ library.name }}</p>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ library.version }}</p>
+                                        <p class="font-medium text-gray-900 dark:text-white">{{ uiLibrary.name }}</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ uiLibrary.version }}</p>
                                     </div>
                                 </div>
-                                <fwb-button size="xs" color="blue" @click="openDocumentation(library.docs)">
-                                    <font-awesome-icon icon="external-link-alt" class="mr-1" />
+                                <fwb-button size="xs" color="blue" @click="openDocumentation(uiLibrary.docs)">
+                                    <FontAwesomeIcon icon="external-link-alt" class="mr-1" />
                                     Docs
                                 </fwb-button>
                             </div>
@@ -133,29 +133,29 @@
                 <fwb-card>
                     <template #header>
                         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-                        <font-awesome-icon icon="home" class="mr-2 text-yellow-500" />
+                            <FontAwesomeIcon icon="home" class="mr-2 text-yellow-500" />
                             Acciones Rápidas
                         </h5>
                     </template>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <fwb-button color="blue" @click="navigateToFlowbite" class="flex flex-col items-center p-4">
-                            <font-awesome-icon icon="eye" class="text-2xl mb-0 mx-2" />
+                        <fwb-button color="blue" class="flex flex-col items-center p-4" @click="navigateToFlowbite">
+                            <FontAwesomeIcon icon="eye" class="text-2xl mb-0 mx-2" />
                             <span>Ver Componentes</span>
                         </fwb-button>
 
-                        <fwb-button color="green" @click="showThemeOptions" class="flex flex-col items-center p-4">
-                            <font-awesome-icon icon="moon" class="text-2xl mb-0 mx-2" />
+                        <fwb-button color="green" class="flex flex-col items-center p-4" @click="showThemeOptions">
+                            <FontAwesomeIcon icon="moon" class="text-2xl mb-0 mx-2" />
                             <span>Cambiar Tema</span>
                         </fwb-button>
 
-                        <fwb-button color="purple" @click="showProjectStats" class="flex flex-col items-center p-4">
-                            <font-awesome-icon icon="star" class="text-2xl mb-0 mx-2" />
+                        <fwb-button color="purple" class="flex flex-col items-center p-4" @click="showProjectStats">
+                            <FontAwesomeIcon icon="star" class="text-2xl mb-0 mx-2" />
                             <span>Estadísticas</span>
                         </fwb-button>
 
-                        <fwb-button color="red" @click="openGitHub" class="flex flex-col items-center p-4">
-                            <font-awesome-icon icon="fa-brands fa-github" class="text-2xl mb-0 mx-2" />
+                        <fwb-button color="red" class="flex flex-col items-center p-4" @click="openGitHub">
+                            <FontAwesomeIcon icon="fa-brands fa-github" class="text-2xl mb-0 mx-2" />
                             <span>GitHub</span>
                         </fwb-button>
                     </div>

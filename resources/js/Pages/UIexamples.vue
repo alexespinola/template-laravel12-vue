@@ -47,7 +47,7 @@ const tableData = ref([
     { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active', created_at: '2024-01-15' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active', created_at: '2024-01-16' },
     { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Manager', status: 'Inactive', created_at: '2024-01-17' },
-    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'User', status: 'Active', created_at: '2024-01-18' },
+    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'User', status: 'Active', created_at: '2024-01-18' }
 ]);
 const tableColumns = ref([
     { title: 'ID', field: 'id', width: 80, sorter: 'number' },
@@ -63,10 +63,10 @@ const tableOptions = ref({
         headerSort:false,
         resizable: false,
         frozen:true,
-        headerHozAlign:"center",
-        hozAlign:"center",
-        formatter:"rowSelection",
-        titleFormatter:"rowSelection",
+        headerHozAlign:'center',
+        hozAlign:'center',
+        formatter:'rowSelection',
+        titleFormatter:'rowSelection',
         cellClick:function(e, cell){
             cell.getRow().toggleSelect();
         }
@@ -149,7 +149,7 @@ const showErrorAlert = () => {
 const showConfirmDialog = async () => {
     const result = await Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: 'You won\'t be able to revert this!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#ef4444',
@@ -187,7 +187,7 @@ const showInputDialog = async () => {
         confirmButtonColor: '#8b5cf6',
         inputValidator: (value) => {
             if (!value) {
-                return 'You need to write something!'
+                return 'You need to write something!';
             }
         }
     });
@@ -215,8 +215,8 @@ const showToast = () => {
         background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
         color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
         didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
         }
     });
 
@@ -252,7 +252,7 @@ const showTimerAlert = () => {
         confirmButtonColor: '#14b8a6',
         didOpen: () => {
             Swal.showLoading();
-            const timer = Swal.getPopup().querySelector("b");
+            const timer = Swal.getPopup().querySelector('b');
             timerInterval = setInterval(() => {
                 timer.textContent = `${Swal.getTimerLeft()}`;
             }, 100);
@@ -286,7 +286,7 @@ const showStepsAlert = async () => {
         const result = await swalQueueStep.fire({
             title: `Step ${currentStep + 1}`,
             text: currentStep === 0 ? 'Enter your name' :
-                  currentStep === 1 ? 'Enter your email' : 'Enter your phone',
+                currentStep === 1 ? 'Enter your email' : 'Enter your phone',
             inputValue: values[currentStep],
             showCancelButton: currentStep > 0,
             currentProgressStep: currentStep
@@ -324,16 +324,19 @@ const downloadCSV = () => {
     }
 };
 
-const onRowClick = (rowData) => {
-    console.log('Row clicked:', rowData);
+const onRowClick = () => {
+    // Callback para manejar click en fila
+    // Aquí puedes agregar lógica para manejar el click
 };
 
-const onRowSelected = (selectedRows) => {
-    console.log('Rows selected:', selectedRows);
+const onRowSelected = () => {
+    // Callback para manejar selección de filas
+    // Aquí puedes agregar lógica para manejar la selección
 };
 
-const onCellEdited = (cellData) => {
-    console.log('Cell edited:', cellData);
+const onCellEdited = () => {
+    // Callback para manejar edición de celdas
+    // Aquí puedes agregar lógica para manejar la edición
 };
 </script>
 
@@ -365,7 +368,7 @@ const onCellEdited = (cellData) => {
                                 />
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Tabulator Table Component -->
                             <div class="mb-6">
@@ -376,24 +379,24 @@ const onCellEdited = (cellData) => {
 
                                 <div class="mb-4 flex gap-2 flex-wrap">
                                     <button
-                                        @click="addNewRow"
                                         class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                        @click="addNewRow"
                                     >
-                                        <font-awesome-icon icon="plus" class="mr-2" />
+                                        <FontAwesomeIcon icon="plus" class="mr-2" />
                                         Add Row
                                     </button>
                                     <button
-                                        @click="deleteSelected"
                                         class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                        @click="deleteSelected"
                                     >
-                                        <font-awesome-icon icon="trash" class="mr-2" />
+                                        <FontAwesomeIcon icon="trash" class="mr-2" />
                                         Delete Selected
                                     </button>
                                     <button
-                                        @click="downloadCSV"
                                         class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+                                        @click="downloadCSV"
                                     >
-                                        <font-awesome-icon icon="download" class="mr-2" />
+                                        <FontAwesomeIcon icon="download" class="mr-2" />
                                         Download CSV
                                     </button>
                                 </div>
@@ -410,7 +413,7 @@ const onCellEdited = (cellData) => {
                                 />
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- FontAwesome Icons -->
                             <div class="mb-6">
@@ -418,55 +421,55 @@ const onCellEdited = (cellData) => {
                                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                     <!-- Solid Icons -->
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon icon="user" class="text-2xl text-blue-500 mb-2" />
+                                        <FontAwesomeIcon icon="user" class="text-2xl text-blue-500 mb-2" />
                                         <p class="text-xs">fas user</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon icon="home" class="text-2xl text-green-500 mb-2" />
+                                        <FontAwesomeIcon icon="home" class="text-2xl text-green-500 mb-2" />
                                         <p class="text-xs">fas home</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon icon="cog" class="text-2xl text-yellow-500 mb-2" />
+                                        <FontAwesomeIcon icon="cog" class="text-2xl text-yellow-500 mb-2" />
                                         <p class="text-xs">fas cog</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon icon="calendar" class="text-2xl text-purple-500 mb-2" />
+                                        <FontAwesomeIcon icon="calendar" class="text-2xl text-purple-500 mb-2" />
                                         <p class="text-xs">fas calendar</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon icon="search" class="text-2xl text-red-500 mb-2" />
+                                        <FontAwesomeIcon icon="search" class="text-2xl text-red-500 mb-2" />
                                         <p class="text-xs">fas search</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon icon="plus" class="text-2xl text-indigo-500 mb-2" />
+                                        <FontAwesomeIcon icon="plus" class="text-2xl text-indigo-500 mb-2" />
                                         <p class="text-xs">fas plus</p>
                                     </div>
 
                                     <!-- Regular Icons -->
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon :icon="['far', 'user']" class="text-2xl text-gray-500 mb-2" />
+                                        <FontAwesomeIcon :icon="['far', 'user']" class="text-2xl text-gray-500 mb-2" />
                                         <p class="text-xs">far user</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon :icon="['far', 'calendar']" class="text-2xl text-gray-500 mb-2" />
+                                        <FontAwesomeIcon :icon="['far', 'calendar']" class="text-2xl text-gray-500 mb-2" />
                                         <p class="text-xs">far calendar</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon :icon="['far', 'heart']" class="text-2xl text-pink-500 mb-2" />
+                                        <FontAwesomeIcon :icon="['far', 'heart']" class="text-2xl text-pink-500 mb-2" />
                                         <p class="text-xs">far heart</p>
                                     </div>
 
                                     <!-- Brand Icons -->
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon :icon="['fab', 'github']" class="text-2xl text-gray-800 dark:text-white mb-2" />
+                                        <FontAwesomeIcon :icon="['fab', 'github']" class="text-2xl text-gray-800 dark:text-white mb-2" />
                                         <p class="text-xs">fab github</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon :icon="['fab', 'twitter']" class="text-2xl text-blue-400 mb-2" />
+                                        <FontAwesomeIcon :icon="['fab', 'twitter']" class="text-2xl text-blue-400 mb-2" />
                                         <p class="text-xs">fab twitter</p>
                                     </div>
                                     <div class="text-center p-4 border rounded-lg dark:border-gray-600">
-                                        <font-awesome-icon :icon="['fab', 'linkedin']" class="text-2xl text-blue-600 mb-2" />
+                                        <FontAwesomeIcon :icon="['fab', 'linkedin']" class="text-2xl text-blue-600 mb-2" />
                                         <p class="text-xs">fab linkedin</p>
                                     </div>
                                 </div>
@@ -475,14 +478,14 @@ const onCellEdited = (cellData) => {
                                 <div class="mt-6">
                                     <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Icon Sizes</h3>
                                     <div class="flex items-center space-x-4">
-                                        <font-awesome-icon icon="star" class="text-xs text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-sm text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-base text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-lg text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-xl text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-2xl text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-3xl text-yellow-500" />
-                                        <font-awesome-icon icon="star" class="text-4xl text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-xs text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-sm text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-base text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-lg text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-xl text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-2xl text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-3xl text-yellow-500" />
+                                        <FontAwesomeIcon icon="star" class="text-4xl text-yellow-500" />
                                     </div>
                                 </div>
 
@@ -490,14 +493,14 @@ const onCellEdited = (cellData) => {
                                 <div class="mt-6">
                                     <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Animated Icons</h3>
                                     <div class="flex items-center space-x-4">
-                                        <font-awesome-icon icon="cog" spin class="text-2xl text-blue-500" />
-                                        <font-awesome-icon icon="search" pulse class="text-2xl text-green-500" />
-                                        <font-awesome-icon icon="heart" beat class="text-2xl text-red-500" />
+                                        <FontAwesomeIcon icon="cog" spin class="text-2xl text-blue-500" />
+                                        <FontAwesomeIcon icon="search" pulse class="text-2xl text-green-500" />
+                                        <FontAwesomeIcon icon="heart" beat class="text-2xl text-red-500" />
                                     </div>
                                 </div>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- SweetAlert2 Examples -->
                             <div class="mb-6">
@@ -508,8 +511,8 @@ const onCellEdited = (cellData) => {
                                     <!-- Basic Alert -->
                                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Basic Alert</h3>
-                                        <fwb-button @click="showBasicAlert" color="blue">
-                                            <font-awesome-icon icon="info-circle" class="mr-2" />
+                                        <fwb-button color="blue" @click="showBasicAlert">
+                                            <FontAwesomeIcon icon="info-circle" class="mr-2" />
                                             Show Alert
                                         </fwb-button>
                                     </div>
@@ -517,8 +520,8 @@ const onCellEdited = (cellData) => {
                                     <!-- Success Alert -->
                                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Success Alert</h3>
-                                        <fwb-button @click="showSuccessAlert" color="green">
-                                            <font-awesome-icon icon="check" class="mr-2" />
+                                        <fwb-button color="green" @click="showSuccessAlert">
+                                            <FontAwesomeIcon icon="check" class="mr-2" />
                                             Success
                                         </fwb-button>
                                     </div>
@@ -526,8 +529,8 @@ const onCellEdited = (cellData) => {
                                     <!-- Error Alert -->
                                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Error Alert</h3>
-                                        <fwb-button @click="showErrorAlert" color="red">
-                                            <font-awesome-icon icon="exclamation-triangle" class="mr-2" />
+                                        <fwb-button color="red" @click="showErrorAlert">
+                                            <FontAwesomeIcon icon="exclamation-triangle" class="mr-2" />
                                             Error
                                         </fwb-button>
                                     </div>
@@ -535,8 +538,8 @@ const onCellEdited = (cellData) => {
                                     <!-- Confirmation Dialog -->
                                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Confirmation</h3>
-                                        <fwb-button @click="showConfirmDialog" color="yellow">
-                                            <font-awesome-icon icon="trash" class="mr-2" />
+                                        <fwb-button color="yellow" @click="showConfirmDialog">
+                                            <FontAwesomeIcon icon="trash" class="mr-2" />
                                             Delete Item
                                         </fwb-button>
                                     </div>
@@ -544,8 +547,8 @@ const onCellEdited = (cellData) => {
                                     <!-- Input Dialog -->
                                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Input Dialog</h3>
-                                        <fwb-button @click="showInputDialog" color="purple">
-                                            <font-awesome-icon icon="user" class="mr-2" />
+                                        <fwb-button color="purple" @click="showInputDialog">
+                                            <FontAwesomeIcon icon="user" class="mr-2" />
                                             Add User
                                         </fwb-button>
                                     </div>
@@ -553,8 +556,8 @@ const onCellEdited = (cellData) => {
                                     <!-- Toast Notification -->
                                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
                                         <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Toast</h3>
-                                        <fwb-button @click="showToast" color="indigo">
-                                            <font-awesome-icon icon="star" class="mr-2" />
+                                        <fwb-button color="indigo" @click="showToast">
+                                            <FontAwesomeIcon icon="star" class="mr-2" />
                                             Show Toast
                                         </fwb-button>
                                     </div>
@@ -564,21 +567,21 @@ const onCellEdited = (cellData) => {
                                 <div class="mt-6">
                                     <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Advanced Examples</h3>
                                     <div class="flex flex-wrap gap-4">
-                                        <fwb-button @click="showImageAlert" color="pink">
-                                            <font-awesome-icon icon="heart" class="mr-2" />
+                                        <fwb-button color="pink" @click="showImageAlert">
+                                            <FontAwesomeIcon icon="heart" class="mr-2" />
                                             With Image
                                         </fwb-button>
-                                        <fwb-button @click="showTimerAlert" color="teal">
+                                        <fwb-button color="teal" @click="showTimerAlert">
                                             Auto Close Timer
                                         </fwb-button>
-                                        <fwb-button @click="showStepsAlert" color="orange">
+                                        <fwb-button color="orange" @click="showStepsAlert">
                                             Multi-Step
                                         </fwb-button>
                                     </div>
                                 </div>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Dropdown Component -->
                             <div class="mb-6">
@@ -588,22 +591,22 @@ const onCellEdited = (cellData) => {
                                         <template #trigger>
                                             <fwb-button color="light">
                                                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
-                                                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                                    <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                                                 </svg>
                                             </fwb-button>
                                         </template>
-                                            <fwb-list-group >
-                                                <fwb-list-group-item>
-                                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                                </fwb-list-group-item>
-                                                <fwb-list-group-item>
-                                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                                </fwb-list-group-item>
-                                            </fwb-list-group>
+                                        <fwb-list-group>
+                                            <fwb-list-group-item>
+                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                            </fwb-list-group-item>
+                                            <fwb-list-group-item>
+                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                            </fwb-list-group-item>
+                                        </fwb-list-group>
                                     </fwb-dropdown>
 
                                     <fwb-dropdown placement="bottom">
-                                        <fwb-list-group >
+                                        <fwb-list-group>
                                             <fwb-list-group-item>
                                                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                                             </fwb-list-group-item>
@@ -615,7 +618,7 @@ const onCellEdited = (cellData) => {
                                 </div>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Alert Component -->
                             <div class="mb-6">
@@ -625,7 +628,7 @@ const onCellEdited = (cellData) => {
                                 </fwb-alert>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Toast Component -->
                             <div class="mb-6">
@@ -699,7 +702,7 @@ const onCellEdited = (cellData) => {
                                 </div>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Card Component -->
                             <div class="mb-6">
@@ -718,7 +721,7 @@ const onCellEdited = (cellData) => {
                                             Read more
                                             <template #suffix>
                                                 <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                                                 </svg>
                                             </template>
                                         </fwb-button>
@@ -726,7 +729,7 @@ const onCellEdited = (cellData) => {
                                 </fwb-card>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Input Component -->
                             <div class="mb-6">
@@ -751,7 +754,7 @@ const onCellEdited = (cellData) => {
                                         validation-status="success"
                                     >
                                         <template #validationMessage>
-                                        <span class="font-medium">Well done!</span> Some success message.
+                                            <span class="font-medium">Well done!</span> Some success message.
                                         </template>
                                     </fwb-input>
 
@@ -763,13 +766,13 @@ const onCellEdited = (cellData) => {
                                         validation-status="error"
                                     >
                                         <template #validationMessage>
-                                        <span class="font-medium">Oh, snapp!</span> Some error message.
+                                            <span class="font-medium">Oh, snapp!</span> Some error message.
                                         </template>
                                     </fwb-input>
                                 </div>
                             </div>
 
-                            <hr>
+                            <hr />
 
                             <!-- Modal Example -->
                             <div class="mb-6">
@@ -788,10 +791,10 @@ const onCellEdited = (cellData) => {
                                     </template>
                                     <template #footer>
                                         <div class="flex justify-between">
-                                            <fwb-button @click="showModal = false" color="blue">
+                                            <fwb-button color="blue" @click="showModal = false">
                                                 Aceptar
                                             </fwb-button>
-                                            <fwb-button @click="showModal = false" color="alternative">
+                                            <fwb-button color="alternative" @click="showModal = false">
                                                 Cancelar
                                             </fwb-button>
                                         </div>
