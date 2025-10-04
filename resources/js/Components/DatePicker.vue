@@ -77,12 +77,15 @@ const initializeFlowbite = async () => {
             // Forzar la inicialización de Flowbite en este elemento específico
             if (window.flowbite && window.flowbite.initFlowbite) {
                 window.flowbite.initFlowbite();
-            } else {
+            } else if (typeof window !== 'undefined' && !window.vitest) {
+                // Solo hacer dynamic import si no estamos en entorno de testing
                 // Fallback: reinicializar todos los elementos datepicker
                 import('flowbite').then((flowbite) => {
                     if (flowbite.initFlowbite) {
                         flowbite.initFlowbite();
                     }
+                }).catch(() => {
+                    // Silenciar errores en tests
                 });
             }
 
