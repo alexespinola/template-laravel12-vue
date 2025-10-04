@@ -27,6 +27,8 @@ import {
     faCalendar as faCalendarRegular
 } from '@fortawesome/free-regular-svg-icons';
 import { faGithub, faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+// SweetAlert2
+import Swal from 'sweetalert2';
 
 library.add(
     faStar, faHeart, faCheck, faExclamationTriangle, faInfoCircle,
@@ -104,6 +106,215 @@ const addNewRow = () => {
 const deleteSelected = () => {
     if (tabulatorRef.value) {
         tabulatorRef.value.deleteSelectedRows();
+    }
+};
+
+// Funciones de SweetAlert2
+const showBasicAlert = () => {
+    Swal.fire({
+        title: 'Hello World!',
+        text: 'This is a basic SweetAlert2 example.',
+        icon: 'info',
+        confirmButtonText: 'Got it!',
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        confirmButtonColor: '#3b82f6'
+    });
+};
+
+const showSuccessAlert = () => {
+    Swal.fire({
+        title: 'Success!',
+        text: 'Operation completed successfully.',
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937'
+    });
+};
+
+const showErrorAlert = () => {
+    Swal.fire({
+        title: 'Oops!',
+        text: 'Something went wrong. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'Try Again',
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        confirmButtonColor: '#ef4444'
+    });
+};
+
+const showConfirmDialog = async () => {
+    const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#6b7280',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937'
+    });
+
+    if (result.isConfirmed) {
+        Swal.fire({
+            title: 'Deleted!',
+            text: 'Your item has been deleted.',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+            color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937'
+        });
+    }
+};
+
+const showInputDialog = async () => {
+    const { value: name } = await Swal.fire({
+        title: 'Add New User',
+        input: 'text',
+        inputLabel: 'User Name',
+        inputPlaceholder: 'Enter user name...',
+        showCancelButton: true,
+        confirmButtonText: 'Add User',
+        cancelButtonText: 'Cancel',
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        confirmButtonColor: '#8b5cf6',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    });
+
+    if (name) {
+        Swal.fire({
+            title: 'User Added!',
+            text: `Welcome ${name}!`,
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+            color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937'
+        });
+    }
+};
+
+const showToast = () => {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Notification sent successfully!'
+    });
+};
+
+const showImageAlert = () => {
+    Swal.fire({
+        title: 'Sweet!',
+        text: 'Modal with a custom image.',
+        imageUrl: 'https://unsplash.com/photos/300x200/?random',
+        imageWidth: 300,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        confirmButtonColor: '#ec4899'
+    });
+};
+
+const showTimerAlert = () => {
+    let timerInterval;
+    Swal.fire({
+        title: 'Auto close alert!',
+        html: 'I will close in <b></b> milliseconds.',
+        timer: 5000,
+        timerProgressBar: true,
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        confirmButtonColor: '#14b8a6',
+        didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    });
+};
+
+const showStepsAlert = async () => {
+    const steps = ['1', '2', '3'];
+    const swalQueueStep = Swal.mixin({
+        confirmButtonText: 'Next →',
+        cancelButtonText: 'Back',
+        progressSteps: steps,
+        input: 'text',
+        inputAttributes: {
+            required: true
+        },
+        reverseButtons: true,
+        background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+        color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+        confirmButtonColor: '#f97316'
+    });
+
+    const values = [];
+    let currentStep;
+
+    for (currentStep = 0; currentStep < steps.length;) {
+        const result = await swalQueueStep.fire({
+            title: `Step ${currentStep + 1}`,
+            text: currentStep === 0 ? 'Enter your name' :
+                  currentStep === 1 ? 'Enter your email' : 'Enter your phone',
+            inputValue: values[currentStep],
+            showCancelButton: currentStep > 0,
+            currentProgressStep: currentStep
+        });
+
+        if (result.value) {
+            values[currentStep] = result.value;
+            currentStep++;
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            currentStep--;
+        } else {
+            break;
+        }
+    }
+
+    if (currentStep === steps.length) {
+        Swal.fire({
+            title: 'All done!',
+            html: `
+                Name: ${values[0]}<br>
+                Email: ${values[1]}<br>
+                Phone: ${values[2]}
+            `,
+            confirmButtonText: 'Lovely!',
+            background: document.documentElement.classList.contains('dark') ? '#1f2937' : '#ffffff',
+            color: document.documentElement.classList.contains('dark') ? '#f9fafb' : '#1f2937',
+            confirmButtonColor: '#f97316'
+        });
     }
 };
 
@@ -282,6 +493,87 @@ const onCellEdited = (cellData) => {
                                         <font-awesome-icon icon="cog" spin class="text-2xl text-blue-500" />
                                         <font-awesome-icon icon="search" pulse class="text-2xl text-green-500" />
                                         <font-awesome-icon icon="heart" beat class="text-2xl text-red-500" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <!-- SweetAlert2 Examples -->
+                            <div class="mb-6">
+                                <h2 class="section-title">SweetAlert2 Examples</h2>
+                                <p class="text-gray-600 dark:text-gray-400 mb-4">Beautiful, responsive, customizable replacement for JavaScript's popup boxes.</p>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    <!-- Basic Alert -->
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Basic Alert</h3>
+                                        <fwb-button @click="showBasicAlert" color="blue">
+                                            <font-awesome-icon icon="info-circle" class="mr-2" />
+                                            Show Alert
+                                        </fwb-button>
+                                    </div>
+
+                                    <!-- Success Alert -->
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Success Alert</h3>
+                                        <fwb-button @click="showSuccessAlert" color="green">
+                                            <font-awesome-icon icon="check" class="mr-2" />
+                                            Success
+                                        </fwb-button>
+                                    </div>
+
+                                    <!-- Error Alert -->
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Error Alert</h3>
+                                        <fwb-button @click="showErrorAlert" color="red">
+                                            <font-awesome-icon icon="exclamation-triangle" class="mr-2" />
+                                            Error
+                                        </fwb-button>
+                                    </div>
+
+                                    <!-- Confirmation Dialog -->
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Confirmation</h3>
+                                        <fwb-button @click="showConfirmDialog" color="yellow">
+                                            <font-awesome-icon icon="trash" class="mr-2" />
+                                            Delete Item
+                                        </fwb-button>
+                                    </div>
+
+                                    <!-- Input Dialog -->
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Input Dialog</h3>
+                                        <fwb-button @click="showInputDialog" color="purple">
+                                            <font-awesome-icon icon="user" class="mr-2" />
+                                            Add User
+                                        </fwb-button>
+                                    </div>
+
+                                    <!-- Toast Notification -->
+                                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                        <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Toast</h3>
+                                        <fwb-button @click="showToast" color="indigo">
+                                            <font-awesome-icon icon="star" class="mr-2" />
+                                            Show Toast
+                                        </fwb-button>
+                                    </div>
+                                </div>
+
+                                <!-- Advanced Examples -->
+                                <div class="mt-6">
+                                    <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Advanced Examples</h3>
+                                    <div class="flex flex-wrap gap-4">
+                                        <fwb-button @click="showImageAlert" color="pink">
+                                            <font-awesome-icon icon="heart" class="mr-2" />
+                                            With Image
+                                        </fwb-button>
+                                        <fwb-button @click="showTimerAlert" color="teal">
+                                            Auto Close Timer
+                                        </fwb-button>
+                                        <fwb-button @click="showStepsAlert" color="orange">
+                                            Multi-Step
+                                        </fwb-button>
                                     </div>
                                 </div>
                             </div>

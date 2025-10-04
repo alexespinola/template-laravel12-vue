@@ -18,9 +18,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/flowbite-example', function () {
-    return Inertia::render('FlowbiteExample');
-})->name('flowbite.example');
+Route::get('/ui-example', function () {
+    return Inertia::render('UIexamples');
+})->name('ui.example');
 
 
 Route::middleware('auth')->group(function () {
