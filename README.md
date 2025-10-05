@@ -20,7 +20,7 @@ Modern web application built with Laravel, Vue 3, and Inertia.js featuring a com
 - [🔄 Development Workflow](#-development-workflow)
 - [🧪 Testing](#-testing)
 - [🧪 Lint Javascript](#-ESLint-Commands)
-- [🏗️ Code styling and standard PHP](#-code-styling-and-standard)
+- [🏗️ Code styling and standard PHP](#-Server-side)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
