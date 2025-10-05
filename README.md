@@ -19,6 +19,7 @@ Modern web application built with Laravel, Vue 3, and Inertia.js featuring a com
 - [🏗️ Project Structure](#️-project-structure)
 - [🔄 Development Workflow](#-development-workflow)
 - [🧪 Testing](#-testing)
+- [🧪 Lint](#-ESLint-Commands)
 - [📄 License](#-license)
 
 ---
@@ -460,7 +461,7 @@ library.add(faUser, faHome);
 
 ## 🧪 Testing
 
-### Running Tests
+### Backend Testing
 ```bash
 # Run PHP tests
 php artisan test
@@ -472,16 +473,13 @@ php artisan test --coverage
 php artisan test --filter=ExampleTest
 ```
 
-### Frontend Testing (Setup Required)
+### Frontend Testing
 ```bash
-# Install testing dependencies
-npm install --save-dev @vue/test-utils vitest jsdom
-
 # Run tests
 npm run test
 ```
 
-### Linting
+## 🧪 ESLint-Commands
 
 ```bash
 
@@ -498,7 +496,7 @@ npm run lint:js
 npm run lint:js:fix
 
 ```
-### ESLint Commands
+
 
 ```bash
 # Analizar un archivo específico
