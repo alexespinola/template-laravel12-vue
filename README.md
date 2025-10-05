@@ -19,7 +19,9 @@ Modern web application built with Laravel, Vue 3, and Inertia.js featuring a com
 - [🏗️ Project Structure](#️-project-structure)
 - [🔄 Development Workflow](#-development-workflow)
 - [🧪 Testing](#-testing)
-- [🧪 Lint](#-ESLint-Commands)
+- [🧪 Lint Javascript](#-ESLint-Commands)
+- [🏗️ Code styling and standard PHP](#-code-styling-and-standard)
+- [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
 ---
@@ -512,6 +514,24 @@ npx eslint resources/js/**/*.{js,vue}
 npx eslint resources/js/**/*.{js,vue} --fix
 ```
 ---
+
+## Code styling and standard
+### Server-side
+We use larastan to verify that the code meets our standards.
+
+
+```bash
+# You should analyze the new code before integrate it with branches corresponding to productive environments (develop, main, etc).
+# You can do it by using the following command (within the dev container)
+vendor/bin/phpstan analyse --memory-limit=1G
+```
+
+
+```bash
+# use PHP CodeSniffer to ensure that our code complies with PSR12 standards.
+# Execute the following command to run the PSR12 standars checking
+vendor/bin/phpcs --standard=PSR12 app
+```
 
 ## 🤝 Contributing
 

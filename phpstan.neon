@@ -1,0 +1,20 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+    paths:
+        - app/
+        - tests/
+
+    # Level 10 is the highest level
+    level: 6
+
+    ignoreErrors:
+        - '#uses generic trait Illuminate\\Database\\Eloquent\\Factories\\HasFactory but does not specify its types#'
+        - '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\ExpectsHigherOrderMessage::with\(\)#'
+        - '#Call to an undefined method Mockery\\LegacyMockInterface::expects\(\)#'
+
+#
+#    excludePaths:
+#        - .///FileToBeExcluded.php
